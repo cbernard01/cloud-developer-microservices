@@ -25,12 +25,15 @@ router.get('/:id',
   });
 
 // update a specific resource
-router.patch('/:id',
-  requireAuth,
-  async (req: Request, res: Response) => {
-    //@TODO try it yourself
-    res.send(500).send("not implemented")
-  });
+router.patch('/:id', requireAuth, async (req: Request, res: Response) => {
+  const {id} = req.params;
+  const {caption, url} = req.body;
+
+  await FeedItem.update({caption, url}, {where: {id}});
+  const item = await FeedItem.findByPk(id);
+
+  return res.status(200).send(item);
+});
 
 
 // Get a signed url to put a new item in the bucket
