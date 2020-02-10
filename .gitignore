@@ -9,6 +9,8 @@
 log.txt
 *.sublime-project
 *.sublime-workspace
+.terraform
+*.tfstate.backup
 .vscode/
 npm-debug.log*
 
