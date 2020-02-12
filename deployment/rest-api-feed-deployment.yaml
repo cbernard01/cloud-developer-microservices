@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: test-rest-api-feed
+  name: test-rest-api-feed
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      service: test-rest-api-feed
+  template:
+    metadata:
+      labels:
+        service: test-rest-api-feed
+    spec:
+      containers:
+        - image: cliffordbernard/rest-api-feed
+          name: feed
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "1024Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8080
+      restartPolicy: Always
